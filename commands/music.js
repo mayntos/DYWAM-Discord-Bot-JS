@@ -13,7 +13,7 @@ function playSong(msg)
     }
 
     const song = songQueue.dequeue();
-    dispatcher = connection.play(ytdl(song.link, { quality: 'lowestaudio', filter: 'audioonly' }));
+    dispatcher = connection.play(ytdl(song.link, { quality: 'highestaudio', filter: 'audioonly' }));
 
     dispatcher.on('start', () => {
         const songEmbed = generateSongEmbed(song.title, song.link, song.artist);
