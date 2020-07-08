@@ -1,6 +1,7 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const { prefix, token } = require('./config.json');
+const prefix = process.env.DISCORD_PREFIX;
+const token = process.env.DISCORD_TOKEN;
 
 const Queue = require('./QueueClass.js');
 const songQueue = new Queue(20);
