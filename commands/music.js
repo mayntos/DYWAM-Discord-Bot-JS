@@ -88,14 +88,19 @@ module.exports =
         switch(args[0])
         {
 
-            case 'queue':
+            case 'add':
                 {
                     ytdl.getInfo(args[1], function(err, info) {
                         const songObject = { link: args[1], title: info.title, artist: info.author.name };
-                        songQueue.enqueue(songObject);
-                        const outMsg = generateSongListEmbed();
-                        message.channel.send({ embed: outMsg });
+                        message.channel.send(`\`${info.title}\` has been added to the queue!`);
+                        songQueue.enqueue(songObject);                        
                     });
+                    break;
+                }
+            case 'queue':
+                {
+                    const outMsg = generateSongListEmbed();
+                    message.channel.send({ embed: outMsg });
                     break;
                 }
             case 'play':
@@ -108,6 +113,16 @@ module.exports =
                     connection = await message.member.voice.channel.join();
 
                     playSong(message);
+                    break;
+                }
+            case 'pause':
+                {
+                    dispatcher.pause();
+                    break;
+                }
+            case 'resume':
+                {
+                    dispatcher.resume();
                     break;
                 }
             case 'skip':
